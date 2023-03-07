@@ -1,0 +1,252 @@
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% BGP context has not been initialized properly.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% BGP context not been initialized properly.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% BGP context has not been initialized properly.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% BGP context not been initialized properly.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% BGP context has not been initialized properly.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% BGP context not been initialized properly.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+% Topology global::IPv4 Unicast::base is currently being deconfigured.
+!
+! Last configuration change at 06:21:26 UTC Mon Jan 9 2023
+!
+version 16.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+platform console serial
+!
+hostname PE2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+ip admission watch-list expiry-time 0
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+! 
+! 
+! 
+! 
+!
+mpls label range 100 200
+multilink bundle-name authenticated
+l2vpn evpn
+ replication-type ingress
+ mpls label mode per-ce
+ router-id Loopback0
+!
+l2vpn evpn instance 20 vlan-based
+ rd 1:2
+ route-target import 1:1
+ route-target export 1:2
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-4277397274
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-4277397274
+ revocation-check none
+ rsakeypair TP-self-signed-4277397274
+!
+!
+crypto pki certificate chain TP-self-signed-4277397274
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 34323737 33393732 3734301E 170D3233 30313038 31393438 
+  30355A17 0D333030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D34 32373733 
+  39373237 34308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 0100B3FD 1E046913 89CE0113 22470F9A B3FD1599 E3B81247 B4BD7857 
+  603D5858 3A6A0613 B02BE2A9 E8F8272A DF7D277D 1D36A4A8 1E0A69A1 D2BD61E9 
+  CDE3142B 69D0A746 9FD4C3B3 F8272088 08883127 8C3E73F6 3574375B A7629021 
+  CB3B11D1 4D3AA073 B17C1010 6BA8EE4E EA70F129 F2F7F394 639AD067 069B6002 
+  86163136 22F32E8E 90806D53 741B698D EAAE0E59 01274C45 737CF2E3 C8792D4C 
+  2792E1B3 2BB959E7 2CFDABB4 77016C4A 23CFEC3B 1A162EDE EC2D8664 E232A7D4 
+  40C38EE6 E2175AE6 5B6D1238 2B267A11 0A06EA1B 9771242D 11BC86B8 C00AE171 
+  1D039247 89CDB2B7 4249EEC6 829BD5F4 D72ED6E2 A65C8CA8 8A4F1A8F 04E02F97 
+  D4FDB489 943D0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
+  301F0603 551D2304 18301680 14CA12A2 BB8B138C 37AD79BB F3D860E0 A457C398 
+  3F301D06 03551D0E 04160414 CA12A2BB 8B138C37 AD79BBF3 D860E0A4 57C3983F 
+  300D0609 2A864886 F70D0101 05050003 82010100 14581EF1 00F773A5 6C3AB2DD 
+  E03CC996 145FE80F 0E3581CD 1456EA44 F008700D F2763EA1 61F99103 D9885E2F 
+  537838A4 6FC66CEF 64874CE0 09418FBF 095A2346 BA6E7E32 978B2CFC D747E79A 
+  994CCDF4 2A228236 4C30E03A 979C0E5E C764B846 6FDB8B86 F694992F 1297A6C3 
+  BBE2F85A 83C59761 10514A30 4345665C 9D4232E9 B3D86FED 09D6F274 869D4733 
+  5835BCA3 BC0D20F1 FF3E5616 2E565010 AEB9FC96 B8A463B3 FE5A5486 627647B8 
+  5E0E4263 0DB55F68 9A709797 A8BA41FF 16C02614 611F9269 958EA43D C9CA8A43 
+  011C1870 DE76DCC4 1984DD13 13FFF5E7 E64FEAC2 4D0408D1 47F9127D F9339CC6 
+  434A1AB1 43D93815 601CC0A0 DD531D94 FCF50047
+  	quit
+!
+!
+!
+!
+!
+!
+!
+!
+license udi pid CSR1000V sn 98VVTCFPW7H
+no license smart enable
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+!
+!
+!
+redundancy
+bridge-domain 20 
+ member GigabitEthernet2 service-instance 20
+ member evpn-instance 20
+!
+!
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+!
+interface Loopback0
+ no shutdown
+ ip address 3.3.3.3 255.255.255.255
+ ip router isis CORE
+!
+interface GigabitEthernet1
+ no shutdown
+ description Towards RR router
+ ip address 193.168.1.1 255.255.255.252
+ ip router isis CORE
+ negotiation auto
+ mpls ip
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet2
+ no shutdown
+ description Towards Customer router CE2
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ service instance 20 ethernet
+  encapsulation untagged
+ !
+!
+interface GigabitEthernet3
+ no shutdown
+ no ip address
+ shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet4
+ no shutdown
+ no ip address
+ shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+router isis CORE
+ net 49.0001.1930.1680.1001.00
+ is-type level-1
+ metric-style wide
+!
+router bgp 1
+ bgp router-id 3.3.3.3
+ bgp log-neighbor-changes
+ !
+ address-family l2vpn evpn
+  neighbor 2.2.2.2 activate
+  neighbor 2.2.2.2 send-community both
+ exit-address-family
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+!
+!
+!
+mpls ldp router-id Loopback0
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+line con 0
+ stopbits 1
+line vty 0 4
+ login
+!
+!
+!
+!
+!
+!
+end
