@@ -1,0 +1,231 @@
+!
+! Last configuration change at 06:20:58 UTC Mon Jan 9 2023
+!
+version 16.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+platform console serial
+!
+hostname PE1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+ip admission watch-list expiry-time 0
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+! 
+! 
+! 
+! 
+!
+mpls label range 300 400
+multilink bundle-name authenticated
+l2vpn evpn
+ replication-type ingress
+ mpls label mode per-ce
+ router-id Loopback0
+!
+l2vpn evpn instance 20 vlan-based
+ rd 1:1
+ route-target import 1:2
+ route-target export 1:1
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-4132890389
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-4132890389
+ revocation-check none
+ rsakeypair TP-self-signed-4132890389
+!
+!
+crypto pki certificate chain TP-self-signed-4132890389
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 34313332 38393033 3839301E 170D3233 30313038 31393437 
+  33325A17 0D333030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D34 31333238 
+  39303338 39308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 0100B6E9 6CDBD44E 294C2A2B 63E4938C 0BCF73E4 C7C01CAE 0F1F5DDB 
+  5EC2526D A1E8AE62 578B27FC F29F2866 06DB8990 60D6A20D 24998C8C 5B4CF7E8 
+  4617BEFD E33DADDA C5D64EC9 F5E6779E FE16F32F C6967104 282215BA F251A6B6 
+  FE565F92 06654977 9DE126DE 5466E597 A3A5E2CC 34E035A8 1C3B04B2 FF7055CF 
+  713B4656 32DEBD2F D0942BB1 1E38E9CE A806E76B 9A2DAC82 1EE6A14C C27C823C 
+  8A05FCB4 4143DAD6 E6CA833E 1E16C6B3 4C80A4B9 C16EDF9E 51C3270B E60A15D2 
+  6C58DCAB D4AB661F B7D783D2 932A2684 2C3D43BA 7725C355 EE68DABC 70CF6677 
+  690B67F5 295E2C31 6ED52E13 52DA123A 9791D535 A9333E9E D3525FFB 1E5F7C21 
+  F3099603 EBC50203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
+  301F0603 551D2304 18301680 14325542 154819E9 2F4149F2 D356BCD6 A976367B 
+  4A301D06 03551D0E 04160414 32554215 4819E92F 4149F2D3 56BCD6A9 76367B4A 
+  300D0609 2A864886 F70D0101 05050003 82010100 0B78BCDC ADDA6FF5 B92FDFB6 
+  B002CA1A E268BC8F B617A853 D5EC29B7 5DFF8D30 E0B4C325 11C59700 EA2A3E9F 
+  6E04743E 343AF0E4 68167A68 8EB09F3D DF8458F0 19547184 59A97DCD 6164217D 
+  C9AAEC0B 074CFDAB CB037007 C8B8DED5 541F11B4 B77F80AC 5C62C715 41BBAFB6 
+  BF625F40 D556218E CD6DFF50 FF8D6B8B 57ECDAA8 FAC9F471 F6840110 1495CCF7 
+  073117C5 07F284DA 0C2D6237 DF054245 E796C9D6 EB8A0524 3176CA42 B2F82147 
+  298754B6 5DB500A9 DD7CD452 187B378E F187AD84 3154C4F7 85E67912 E9F3E6F8 
+  EE1DB7F5 59F4ED67 ECC9A087 A22C41BF 7538A3D2 7A044E3C 4E6FCD08 99202440 
+  B9ADD271 D4BDAEF6 BAB76381 1529321A B5E64669
+  	quit
+!
+!
+!
+!
+!
+!
+!
+!
+license udi pid CSR1000V sn 94FSSRE4V1U
+no license smart enable
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+!
+!
+!
+redundancy
+bridge-domain 20 
+ member GigabitEthernet2 service-instance 20
+ member evpn-instance 20
+!
+!
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+!
+interface Loopback0
+ no shutdown
+ ip address 1.1.1.1 255.255.255.255
+!
+interface GigabitEthernet1
+ no shutdown
+ description Towards RR router
+ ip address 192.168.1.1 255.255.255.252
+ ip router isis CORE
+ negotiation auto
+ mpls ip
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet2
+ no shutdown
+ description Towards customer router CE1
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ service instance 20 ethernet
+  encapsulation untagged
+ !
+!
+interface GigabitEthernet3
+ no shutdown
+ no ip address
+ shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet4
+ no shutdown
+ no ip address
+ shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+router isis CORE
+ net 49.0001.1920.1680.1001.00
+ is-type level-1
+ metric-style wide
+ passive-interface Loopback0
+ mpls ldp autoconfig
+!
+router isis
+ metric-style narrow
+!
+router bgp 1
+ bgp router-id 1.1.1.1
+ bgp log-neighbor-changes
+ neighbor 2.2.2.2 remote-as 1
+ neighbor 2.2.2.2 update-source Loopback0
+ !
+ address-family l2vpn evpn
+  neighbor 2.2.2.2 activate
+  neighbor 2.2.2.2 send-community both
+ exit-address-family
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+!
+!
+!
+mpls ldp router-id Loopback0
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+line con 0
+ stopbits 1
+line vty 0 4
+ login
+!
+!
+!
+!
+!
+!
+end
